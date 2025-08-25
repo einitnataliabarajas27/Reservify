@@ -1,7 +1,6 @@
 # Importacion del FastAPI
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException , Request
 from fastapi.middleware.cors import CORSMiddleware
-
 
 
 # Importacion de los routers
@@ -18,6 +17,7 @@ from routes.reserva import router as reserva_router
 from routes.categorias import router as categorias_router
 from routes.comentarios import router as comentarios_router
 from routes.cal_mensuales import router as cal_mensuales_router
+from routes.register import router as register_router
 
 # Importacion de los esquemas
 from models import *
@@ -31,7 +31,7 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],  # Cambia al dominio de tu frontend
+    allow_origins=["*"],  # Cambia al dominio de tu frontend
     allow_credentials=True,
     allow_methods=["*"],  # O especifica ["POST"]
     allow_headers=["*"],
@@ -48,6 +48,7 @@ app.include_router(empleado_router)
 app.include_router(enc_fac_router)
 app.include_router(det_fac_router)
 app.include_router(reserva_router)
+app.include_router(register_router)
 app.include_router(categorias_router)
 app.include_router(comentarios_router)
 app.include_router(cal_mensuales_router)

@@ -35,8 +35,8 @@ async def send2hbf(db: Session, id_reserva: int):
     if row is None:
         return None
 
-    horario = row[2]
-    fecha = row[3]
+    horario = row[1]
+    fecha = row[2]
 
     if horario and fecha:
         reserva_datetime = datetime.combine(fecha, horario)
@@ -44,7 +44,7 @@ async def send2hbf(db: Session, id_reserva: int):
 
         if timedelta(hours=0) <= (reserva_datetime - ahora) <= timedelta(hours=2):
             email_data = EmailSchema(
-                to="isiku.978@gmail.com",
+                to="nataliabarajas412@gmail.com",
                 subject="En 2 horas tienes una reserva",
                 message=f"La reserva con ID {id_reserva} es a las {reserva_datetime.strftime('%H:%M')} del {fecha}",
             )
